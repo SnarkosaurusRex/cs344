@@ -1,0 +1,55 @@
+---- Exercise 2.1 ----
+a.) Which of the local search algorithms solves the problem? How well does each algorithm do?
+		Both algorithms correctly solve the problem.
+
+b.) Which algorithm works more quickly?
+		The Hill-climbing algorithm was significantly faster than the Simulated annealing algorithm. After five trials, the average time for the hill-climbing algorithm was 0.000128030777, and the average time for the simulated annealing algorithm was 0.009193849564 (nearly 72 times longer)
+
+c.) Does the starting value for x make any difference? Why or why not?
+		The starting value for x affects the runtime, but the hill-climbing algorithm is still always faster. The closer the initial value is to the value of x at the local maximum (in this case 15), the shorter the runtime will be.
+
+d.) What effect does changing the delta step value make on each algorithm? Why?
+		Depending on the delta step value changes whether or not it can get the correct answer. The difference between the initial value of x and the value of x at the local maximum (in this case 15) must be divisible by the delta step value in order to get the correct answer. For instance, if delta=2.0 and the initial value of x is an even number, both algorithms will find a local maximum at either x=14 or x=16. For delta values between 0 and 1, the simulated annealing algorithm may or may not be able to reach the correct local maximum before it runs out of iterations, depending on how close the initial value of x is.
+
+e.) What is the purpose of the exp_schedule() method in the simulated annealing function call?
+		It specifies the parameters for the schedule function to be used by the simulated annealing function.
+
+
+---- Exercise 2.2 ----
+a.) How do each of the algorithms do on this problem space? Why?
+		Once again, the hill-climbing solution is faster, but the simulated annealing algorithm consistently finds a higher maximum value. The hill-climbing algorithm only ever returns the nearest “peak” value, whereas the simulated annealing algorithm gets closer to the global maximum.
+
+b.) Does the starting value make any difference here?
+		Yes - it determines how close each algorithm is able to get, especially the hill-climbing algorithm.
+
+c.) Does modifying the step size (i.e., delta) affect the operation of the two algorithms? Why or why not?
+		The hill-climbing algorithm tends to get a higher maximum value with a smaller step size because it can get closer to the pinnacle of the peak it’s moving towards. The simulated annealing algorithm tends to get a higher maximum value with a larger step size because it is able to cover a larger range in the same number of jumps.
+
+d.) What are the maximum and minimum possible values here, and how do the two algorithms score with respect to them?
+		Within the starting point range (between 0 and 30), the maximum possible value is approximately 29.862 (x≈29.879), and the minimum possible value is 0 (x=0). Both algorithms have come quite close to that maximum value, depending on the initial x value and the delta value.
+
+
+---- Exercise 2.3 ----
+a.) How does each algorithm do with these restarts? Why?
+		Both algorithms tend to be more accurate because they have more chances to get a better solution.
+
+b.) What are the average values of the runs for each of the algorithms?
+		Averages after 5 trials:
+			Hill-climbing: 26.5859098
+			Simulated annealing: 37.39240079
+
+c.) If one of the algorithms does better, explain why; if not, explain why not.
+		Simulated annealing tends to get a higher value because it cheats (i.e. it seems to ignore the maximum of x=30).
+
+
+---- Exercise 2.4 ----
+a.) For which algorithm does beam search make the most sense?
+		It would make more sense for the simulated annealing algorithm, since that would evaluate options in both directions rather than just one.
+
+b.) How many solutions could you maintain with reasonable space and time constraints?
+		Depends on the context of the problem, what sort of system you’re working with, what your definition of “reasonable” is, etc. :P
+
+c.) How would you modify the code to implement beam search? How is it different from random restarts, if at all?
+		I would probably modify the code so that it would do a more deep/thorough evaluation of whichever direction seemed more promising.
+		Random restarts takes the “quantity” approach by just trying the whole process multiple times, whereas beam search takes the “quality” approach by only evaluating the more promising options.
+
