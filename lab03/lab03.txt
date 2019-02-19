@@ -1,0 +1,44 @@
+﻿---- Exercise 3.1 ----
+a.) Which algorithms work (in a timely manner) and which don’t? Explain your results in terms of the capabilities (and implementations) of the algorithms and nature of the problems.
+        All of the algorithms are able to solve (well, “solve” ;P ) the solved sudoku very quickly.
+        The depth-first search algorithm was unable to solve the easy, harder, or hardest sudokus in a reasonable amount of time. This makes sense because it’s essentially the “brute force” method, as it goes through and evaluates every possible solution to the whole sudoku, valid or not.
+		The AC-3 algorithm terminated quickly for each puzzle, succeeding in solving the easy sudoku but failing to solve the harder and hardest sudokus. This makes sense because the AC-3 algorithm works by eliminating possibilities (from the domain for each variable) that are inconsistent with the constraints, which means that for the more difficult sudokus (which require “thinking ahead”) it isn’t able to eliminate enough possibilities to reach a solution.
+        The backtracking algorithm is able to solve the easy sudoku, but more slowly (≈50 seconds), but I had to manually terminate the program when run on the harder and hardest sudokus due to excessive runtime. These results make sense because the backtracking algorithm is pretty much designed to just evaluate everything (i.e. it has a massive search space).
+        The Min-conflicts algorithm is able to solve each of the sudokus, but more slowly (≈108 seconds each). It works by going through (in a random order) each of the variables that have conflicts and changing the value of that variable to the value that has the fewest conflicts with the constraints, so it makes sense that it would be successful, albeit not as quickly.
+
+b.) What effect does configuring the settings for backtracking have on the results? Try the following:
+	i.) Set the variable/value ordering (i.e., the select_unassigned_variable parameter) to first-unassigned-variable (the default) or minimum-remaining-values (i.e., mrv).
+        Doing this seems to have caused it to run slightly more slowly on the solved sudoku and much more erratically on the easy sudoku (sometimes faster, sometimes slower, sometimes doesn’t finish). It was still unable to solve the harder or hardest sudokus in a timely manner.
+
+	ii.) Set the inference (i.e., the inference parameter) to forward-checking (i.e., forward_checking).
+        Doing this caused it to run a smidge more slowly on the solved sudoku, but significantly faster on the other sudokus such that it was able to solve both the harder and hardest sudokus as well. Interestingly, it consistently took about 90 seconds to solve the harder sudoku, but about 0.5 seconds to solve the hardest sudoku.
+
+	Which, if any, of these settings should work best for sudoku? What combination of settings actually works the best?
+        I would think that using the minimum-remaining-values and forward-checking settings would work the best because it more closely mimics the way a human would solve a sudoku - by looking at the boxes with the fewest possibilities left before looking at boxes with more possibilities left, and by thinking ahead while evaluating possibilities.
+        As I had guessed, using both the minimum-remaining-values and forward-checking settings worked the best: it resulted in a tiny slowdown for the solved sudoku, but had by far the fastest runtimes for the other three sudokus.
+
+
+---- Exercise 3.2 ----
+a.) How large can n get for each of the algorithms? Why?
+        (comment in queens.py says to skip depth-first search)
+		The AC-3 algorithm fails for every value of n because it isn’t able to narrow the possibilities down into one solution.
+		The backtracking algorithm is able to solve up to a value of n=29 in a reasonable amount of time. For larger values of n, the search space is too large to allow it to be solved reasonably quickly.
+		The min-conflicts algorithm seems to be able to solve up to n=8000 in a reasonable amount of time (≈2 minutes). It is able to get further than the other algorithms because it deals with the conflicted variables rather than with entire states (i.e. narrows down the search space).
+
+b.) What backtracking settings work the best? Why?
+        As with the sudokus, using both the minimum-remaining-values and forward-checking settings worked the best/fastest. This is because it gets the algorithm to work in a more logical order, as well as think ahead about the choices it makes.
+
+
+c.) How many steps does Min-Conflicts require to do its work?
+        Due to the randomness involved in the min_conflicts() method, the number of steps it needs is not consistent. It depends on the value for x, as well the as the max-steps parameter.
+
+
+---- Exercise 3.3 ----
+a.) Compare and contrast the specifications for CSP (i.e., csp.CSP) and traditional problems (i.e., search.Problem). Be sure to consider the nature of states, domains, actions, results and goal tests.
+        Both CSPs and traditional problems have states, which are representations of the variables and their current values, and domains, which specify what values the variables can have. Both types of problems also have actions, which are the steps that can be taken from a given state, and results, which are states that follow from the given state via the given action. The biggest difference is probably in their goal tests. The goal test for a CSP checks if all variables are assigned and if all constraints are satisfied in the given state. The goal test for traditional problems checks if the given state is (one of) the specified goal state(s).
+
+b.) Compare and contrast the nature of the heuristics deployed in traditional and constraint-based problem solving.
+        One big difference is that constraint-based problem solving limits the search space to only valid states, whereas in traditional problem solving all possible states are evaluated, whether they’re valid or not. Also, the use of constraints in CSPs allow constraint-based problem solving methods to do some further, more in-depth analysis/”thinking” as they go, whereas traditional problem solving methods are pretty much just trial and error. This means that CSP methods are more able to avoid taking unhelpful actions and thus generally require fewer steps in order to reach a solution.
+
+
+
