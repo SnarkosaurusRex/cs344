@@ -19,6 +19,9 @@ cancerNet = BayesNet([
 
 
 # a. P(Cancer | positive results on both tests)
+# Calculating this by hand means multiplying the probability of having cancer in
+# the first place times the probability of the first test giving a correct positive result,
+# times the probability of the second test giving a correct possitive result.
 print('P(Cancer | positive results on both tests):')
 print('\t' + enumeration_ask('Cancer', dict(Test1=T, Test2=T), cancerNet).show_approx())
 
