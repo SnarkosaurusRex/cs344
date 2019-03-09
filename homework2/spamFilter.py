@@ -1,5 +1,5 @@
 """
-spamFilter.py implements a Bayesian spam filter based on Paul Graham's A Plan for Spam.
+This module implements a Bayesian spam filter based on Paul Graham's "A Plan for Spam".
 Part 1 of Homework 2 for CS 344
 
 @author: ljh27
@@ -74,7 +74,7 @@ def evaluate_msg(msg, probs):
         return ["Not spam", spam_prob]
 
 
-#Set up some test data
+#Test it out!
 spam_corpus = [["I", "am", "spam", "spam", "I", "am"], ["I", "do", "not", "like", "that", "spamiam"]]
 ham_corpus = [["do", "i", "like", "green", "eggs", "and", "ham"], ["i", "do"]]
 ngood = len(ham_corpus)

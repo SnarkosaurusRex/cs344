@@ -6,7 +6,7 @@ Part 2 of Homework 2 for CS 344
 @author: ljh27
 """
 
-from probability import BayesNet, enumeration_ask, elimination_ask, gibbs_ask
+from probability import BayesNet, enumeration_ask
 
 # Utility variables
 T, F = True, False
@@ -20,6 +20,7 @@ cloudyNet = BayesNet([
     ])
 
 
+# Part 2d
 # i. P(Cloudy)
 print('P(Cloudy):')
 print('\t' + enumeration_ask('Cloudy', dict(), cloudyNet).show_approx())
@@ -39,13 +40,3 @@ print('\t' + enumeration_ask('WetGrass', dict(Cloudy=T, Sprinkler=T, Rain=T), cl
 # v. P(Cloudy | ¬WetGrass)
 print('\nP(Cloudy | ¬WetGrass):')
 print('\t' + enumeration_ask('Cloudy', dict(WetGrass=F), cloudyNet).show_approx())
-
-
-
-
-
-# # elimination_ask() is a dynamic programming version of enumeration_ask().
-# print('\telimination_ask: ' + elimination_ask('Burglary', dict(JohnCalls=T, MaryCalls=T), cloudyNet).show_approx())
-# # gibbs_ask() is an approximation algorithm helps Bayesian Networks scale up.
-# print('\tgibbs_ask: ' + gibbs_ask('Burglary', dict(JohnCalls=T, MaryCalls=T), cloudyNet).show_approx())
-# # See the explanation of the algorithms in AIMA Section 14.4.
