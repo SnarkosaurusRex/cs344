@@ -5,8 +5,6 @@ Part 1 of Homework 2 for CS 344
 @author: ljh27
 """
 
-from probability import BayesNet, enumeration_ask, elimination_ask, gibbs_ask
-
 
 def parse_corpus(corpus):
     corpus_dict = {}
@@ -58,6 +56,24 @@ def create_probs_dict(words, good, bad, ngood, nbad):
     return probs_dict
 
 
+def evaluate_msg(msg, probs):
+    prod = 1
+    comp_prod = 1
+    for word in msg:
+        if word in probs:
+            prod *= probs[word]
+            comp_prod *= (1 - probs[word])
+        else:
+            prod *= 0.4
+            comp_prod *= 0.6
+    spam_prob = prod / (prod + comp_prod)
+
+    if spam_prob > 0.9:
+        return ["SPAM", spam_prob]
+    else:
+        return ["Not spam", spam_prob]
+
+
 #Set up some test data
 spam_corpus = [["I", "am", "spam", "spam", "I", "am"], ["I", "do", "not", "like", "that", "spamiam"]]
 ham_corpus = [["do", "i", "like", "green", "eggs", "and", "ham"], ["i", "do"]]
@@ -69,35 +85,24 @@ bad = parse_corpus(spam_corpus)
 words = get_unique_words([ham_corpus, spam_corpus])
 probs = create_probs_dict(words, good, bad, ngood, nbad)
 
-print('good: ')
-print(good)
-print('\nbad: ')
-print(bad)
-print('\nUnique words: ')
-print(words)
-print('\nprobs: ')
+print("good: " + str(good))
+print("bad: " + str(bad))
+print("\nprobs: ")
 print(probs)
 
 
-# courses = ['cs108', 'cs112', 'cs212', 'cs214', 'cs232', 'cs262', 'cs342']
-# faculty = ['adams', 'plantinga', 'bailey', 'schuurman']
-# classtimes = ['mwf0900', 'mwf1030', 'mwf1130', 'mwf1230']
-# classrooms = ['nh253', 'sb382']
-# slots = create_timeroom_slots(classtimes, classrooms)
-# domains = create_domains(courses, assignments, slots)
-# neighbors = create_nonreflexive_neighbors(courses)
+print("\n\n--- TESTS ---")
+test_msg = ["I", "do", "not", "like", "green", "eggs", "and", "ham", "i", "do", "not", "like", "them", "Sam-I-am"]
+test_result = evaluate_msg(test_msg, probs)
+print(" Message: " + " ".join(test_msg))
+print("\tResult: " + test_result[0] + " (Probability = " + str(test_result[1]) + ")")
 
-#Run it!
-# solution = min_conflicts(CSP(courses, domains, neighbors, schedule_constraint))
-#
-# print('Variables: ' + str(courses))
-# print('Domains:')
-# for d in domains:
-#     print("\t{0}: {1}".format(d, domains[d]))
-# print('Neighbors (non-reflexive):')
-# for n in neighbors:
-#     print("\t{0}: {1}".format(n, neighbors[n]))
-# print('Solution:')
-# for s in solution:
-#     print("\t{0}: {1}".format(s, solution[s]))
-# # print(solution)
+test_msg2 = ["You", "can't", "have", "egg", "bacon", "spam", "and", "sausage", "without", "the", "spam"]
+test_result2 = evaluate_msg(test_msg2, probs)
+print("\n Message: " + " ".join(test_msg2))
+print("\tResult: " + test_result2[0] + " (Probability = " + str(test_result2[1]) + ")")
+
+test_msg3 = ["spam", "egg", "spam", "spam", "bacon", "and", "spam"]
+test_result3 = evaluate_msg(test_msg3, probs)
+print("\n Message: " + " ".join(test_msg3))
+print("\tResult: " + test_result3[0] + " (Probability = " + str(test_result3[1]) + ")")
