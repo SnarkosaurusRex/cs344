@@ -1,0 +1,30 @@
+﻿--- LAB 6 ---
+
+Exercise 6.1:
+a.) Try It Yourself: Framing
+	Exercise 1: We want the ML model to identify whether an email in Gmail is “important”.
+	
+	Exercise 2: Our ideal outcome is to help users prioritize[a] emails by identifying which emails are important.
+	
+	Exercise 3: Our success metrics are the order in which new emails are read (i.e. if emails marked as “important” are read before emails that aren’t marked as “important”), whether the user replies to the email or not, the amount of time that emails sit unread in the inbox, and whether or not the user deletes the email or reports it as spam.
+        Our key results for the success metrics are that 85% of “important” emails are read before “unimportant” emails, that the user replies to a greater percentage of “important” emails than “unimportant” emails, and that “important” emails sit unread in the inbox for a shorter average time than “unimportant” emails do.
+        Our ML model is deemed a failure if there is weak/no correlation between the order in which emails are read and whether they are marked “important” or not, if the user replies to the same percentage of “important” as “unimportant” emails, if “important” emails sit unread in the inbox the same amount of time (on average) as “unimportant” emails, and/or if the user marks as spam/immediately deletes more than 4% of “important” emails.
+    
+    Exercise 4: The output from our ML model will be an indicator of whether an email is “important” or not. This could be defined as a numeric value indicating the importance level of the email, and if that number is above a certain threshold, the email is deemed “important”.
+    
+    Exercise 5: The output from the ML model will be be made when a new email is received. The outcome will be used to decide whether to mark that email as “important” or not, which will be shown in the UI by the presence (or absence) of an “important” tag/label.
+    
+    Exercise 6: If we didn’t use ML, we would look for certain keywords within the email and/or consider the frequency with which the user reads/replies to emails from that particular sender.
+
+
+b.) Try It Yourself: Formulating
+	Exercise 7a: This problem is best framed as binary classification which predicts whether an email is in the “important” class or the “unimportant” class.
+	
+	Exercise 7b: (same as 7a)
+	
+	Exercise 8: inputs: sender, subject line, message text; output: “important”/”unimportant”
+	
+	Exercise 9: These inputs are contained within the email.
+	
+	Exercise 10: The sender, subject line, and message text could be easily obtained from the email.
+
