@@ -1,0 +1,19 @@
+--- LAB 7 ---
+
+Exercise 7.1:
+
+a.) Submit your solutions to exercises 1–2.
+	Exercise 1:
+		cities['Exercise 1'] = cities['City name'].apply(lambda name: name.startswith('San')) & cities['Area square miles'].apply(lambda area: area > 50)
+		cities
+
+	Exercise 2:
+		cities.reindex([8, 1, 4, 0, 2])
+		
+		Adding “missing” indices is allowed because it makes it easier to use an external list to reindex because you don’t have to sanitize the input.
+
+b.) Why would one use Pandas rather than the standard data manipulation features provided by NumPy?
+		Pandas Series can be used as arguments to most NumPy functions. Pandas also includes nifty graphing functionality.
+
+c.) Under what circumstances would it be useful to reorder/shuffle a Pandas DataFrame?
+		It could be useful to reorder a Pandas DataFrame if, for instance, you wanted to sort the rows by a certain column. It would also be useful if you wanted to randomize the order for any reason.

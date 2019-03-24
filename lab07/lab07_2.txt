@@ -1,0 +1,35 @@
+--- LAB 7 ---
+
+Exercise 7.2:
+
+a.) Compare and contrast categorical vs numerical data
+		Categorical data is textual data. Numerical data is data that is in number form and that you would actually use/treat as a number. So, if it’s something like a phone number or a zip code that would be more appropriate as a string than a number type, it would be categorical rather than numerical data.
+
+b.) Submit solutions to tasks 1–2. Include your best hyper-parameter values and the resulting RMSE, but not the training output.
+	Task 1:
+		learning_rate=0.00004,
+		steps=200,
+		batch_size=1
+		Final RMSE (on training data): 173.38
+	
+	Task 2:
+		train_model(
+			learning_rate=0.00004,
+			steps=500,
+			batch_size=5,
+			input_feature="population"
+		)
+		Final RMSE (on training data): 175.93
+
+c.) What are the hyper-parameters learned in these exercises and is there a “standard” tuning algorithm for them?
+	learning_rate: A `float`, the learning rate.
+	steps: A non-zero `int`, the total number of training steps. A training step consists of a forward and backward pass using a single batch.
+	batch_size: A non-zero `int`, the batch size.
+	input_feature: A `string` specifying a column from `california_housing_dataframe` to use as input feature.
+
+	There is no “standard” tuning algorithm for them because the effects of different hyperparameters are data dependent, but there are some rules of thumb:
+		--Training error should steadily decrease (steeply at first; should eventually plateau as training converges)
+		--If the training has not converged, try running it for longer
+		--If the training error decreases too slowly, increasing the learning rate may help it decrease faster (but sometimes the exact opposite may happen if the learning rate is too high!)
+		--If the training error varies wildly, try decreasing the learning rate (lower learning rate plus larger number of steps or larger batch size is often a good combo)
+		--Very small batch sizes can also cause instability. First try larger values like 100 or 1000, and decrease until you see degradation.

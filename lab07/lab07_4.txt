@@ -1,0 +1,70 @@
+--- LAB 7 ---
+
+Exercise 7.4:
+
+a.) Submit solutions to tasks 1–5.
+	Task 1:
+		The block that has 8.0 total rooms and a population of 8.0 has a rooms_per_person value of 0.1, which doesn’t quite make sense. That same block also has only 1.0 households, which looks like a pretty extreme outlier compared to the others. The blocks with 18.3 and 55.2 rooms per person also appear to be outliers. Something also seems off about the block with 0.0 rooms per person; I’m guessing that one probably got rounded down. Also, there are no clear units for the median_income column.
+	
+	Task 2:
+		Several of the summary values of the training set are pretty drastically different than the corresponding summary value of the validation set. The mean and the 75% value are particularly different.
+
+	Task 3:
+		Uncommenting the part of the code that randomizes the order of the data before splitting it into the training set and the validation set and then running the code again produces training and validation sets with fittingly similar summary values.
+
+	Task 4:
+		# 1. Create input functions.
+		training_input_fn = lambda: my_input_fn(
+			training_examples,
+			training_targets["median_house_value"],
+			batch_size=batch_size)
+		predict_training_input_fn = lambda: my_input_fn(
+			training_examples,
+			training_targets["median_house_value"],
+			num_epochs=1,
+			shuffle=False)
+		predict_validation_input_fn = lambda: my_input_fn(
+			validation_examples, validation_targets["median_house_value"],
+			num_epochs=1,
+			shuffle=False)
+		
+		# 2. Take a break and compute predictions.
+		training_predictions = linear_regressor.predict(input_fn=predict_training_input_fn)
+		validation_predictions = np.array([item['predictions'][0] for item in training_predictions])
+
+		linear_regressor = train_model(
+			learning_rate=0.00012,
+			steps=100,
+			batch_size=1,
+			training_examples=training_examples,
+			training_targets=training_targets,
+			validation_examples=validation_examples,
+			validation_targets=validation_targets
+		)
+		RMSE: 168.17
+
+	Task 5:
+		california_housing_test_data = pd.read_csv("https://download.mlcc.google.com/mledu-datasets/california_housing_test.csv", sep=",")
+
+		test_examples = preprocess_features(california_housing_test_data)
+		test_targets = preprocess_targets(california_housing_test_data)
+
+		predict_test_input_fn = lambda: my_input_fn(
+			test_examples,
+			test_targets["median_house_value"],
+			num_epochs=1,
+			shuffle=False)
+
+		test_predictions = linear_regressor.predict(input_fn=predict_test_input_fn)
+		test_predictions = np.array([item['predictions'][0] for item in test_predictions])
+
+		root_mean_squared_error = math.sqrt(
+			metrics.mean_squared_error(test_predictions, test_targets))
+
+		print("Final RMSE (on test data): %0.2f" % root_mean_squared_error)
+
+	  Final RMSE (on test data): 162.68
+	  The final RMSE is lower than that on the validation data, so presumably the generalization performance of the model is good.
+
+b.) Give a one-paragraph summary of what you learned about using training, validation and testing datasets.
+		Basically, everything depends on the data. Optimizing the hyperparameter values depends on the data, the accuracy of the data directly affects how accurate the ML model can be, any oddities in training data can get embedded into the ML model, debugging in ML often means finding bugs in the data as opposed to bugs in the code, and so on. It seems like, in general, there’s a decent amount of trial and error, and it’s important to keep checking that the results are making sense.
