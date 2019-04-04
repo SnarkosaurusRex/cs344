@@ -1,0 +1,39 @@
+--- LAB 8 ---
+
+Exercise 8.1:
+
+a.) What does the Pearson correlation coefficient measure? Identify one example value from the correlation table you compute and explain why it makes sense.
+	The Pearson correlation coefficient is a measure of the linear correlation between two variables X and Y. It can range from -1 to 1, with -1 being perfect negative linear correlation, 1 being perfect positive linear correlation, and 0 being no linear correlation.
+	In the correlation table, households and population have a correlation coefficient of 0.9, which makes sense because the more people there are, the more households there’s likely to be.
+
+b.) Submit your solutions to tasks 1–2. Include the features you selected for task 1 and the synthetic features you developed for task 2; include the final RMS errors but not the training output. Did you beat the Google-provided baselines?
+	Task 1:
+		Features used: median_income
+		learning_rate=0.004, steps=600, batch_size=10
+		RMSE: 189.21
+
+	Task 2:
+		def select_and_transform_features(source_df):
+      selected_examples = pd.DataFrame()
+      selected_examples["median_income"] = source_df["median_income"]
+      selected_examples["latitude"] = source_df["latitude"]
+      selected_examples["hot_spot1"] = source_df["latitude"].apply(lambda lat: 33 < lat < 35) & source_df["longitude"].apply(lambda lon: -123 < lon < -121)
+      selected_examples["hot_spot2"] = source_df["latitude"].apply(lambda lat: 37 < lat < 39) & source_df["longitude"].apply(lambda lon: -119 < -117)
+      selected_examples["distance_from_san_francisco"] = abs(source_df["latitude"] - 38)
+      return selected_examples
+
+    selected_training_examples = select_and_transform_features(training_examples)
+    selected_validation_examples = select_and_transform_features(validation_examples)
+
+    _ = train_model(
+        learning_rate=0.004,
+        steps=500,
+        batch_size=5,
+        training_examples=minimal_training_examples,
+        training_targets=training_targets,
+        validation_examples=minimal_validation_examples,
+        validation_targets=validation_targets)
+
+		RMSE: 116.76
+		
+	I beat the Google-provided baselines in Task 2 but not Task 1.
