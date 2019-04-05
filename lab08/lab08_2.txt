@@ -1,0 +1,31 @@
+--- LAB 8 ---
+
+Exercise 8.2:
+
+a.) They recommend FTRL for L1 optimization, but the code specifies the same rate (learning_rate) for all runs. How is FTRL managing the learning rate?
+   FtrlOptimizer has a learning_rate_power parameter that defaults to -0.5; this value is used to decrease the learning rate as the training progresses.
+
+b.) What good does the bucketing/binning do?
+   Bucketizing sorts the values into groups (buckets) based on some arbitrary range of the buckets. In this case, the bucket boundaries are set such that each bucket has the same number of examples in it.
+
+c.) Submit your solutions to tasks 1–2. Did you find their task 1 bucketing to make sense? Identify one unique feature cross for task 2 and explain how it could be useful.
+   Task 1:
+     bucketized_latitude = tf.feature_column.bucketized_column(
+       latitude, boundaries=get_quantile_based_boundaries(
+         training_examples["latitude"], 10))
+     bucketized_housing_median_age = tf.feature_column.bucketized_column(
+       housing_median_age, boundaries=get_quantile_based_boundaries(
+         training_examples["housing_median_age"], 10))
+     bucketized_median_income = tf.feature_column.bucketized_column(
+       median_income, boundaries=get_quantile_based_boundaries(
+         training_examples["median_income"], 10))
+     bucketized_rooms_per_person = tf.feature_column.bucketized_column(
+       rooms_per_person, boundaries=get_quantile_based_boundaries(
+         training_examples["rooms_per_person"], 10))
+
+	  I didn’t really get why they chose the numbers they did, so in that sense their bucketing didn’t particularly make sense.
+
+	Task 2:
+		long_x_lat = tf.feature_column.crossed_column([bucketized_longitude, bucketized_latitude], 1000)
+		
+		Another feature cross that might be useful could be a cross of total_rooms and total_bedrooms. If a house has a relatively low proportion of bedrooms (as opposed to other types of rooms) that would mean it has more “extra space” (e.g. additional bathrooms, living room(s), dining room, porch, etc.) than strictly necessary for living in, which would add value to it.
