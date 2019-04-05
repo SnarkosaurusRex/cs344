@@ -1,0 +1,18 @@
+--- LAB 8 ---
+
+Exercise 8.3:
+
+a.) Compare and contrast Seaborn vs. MatPlotLib.
+	This example uses Seaborn to create the pairplot showing the grid of scatterplots that shows the joint distribution of four of the columns from the training set. MatPlotLib is used for the more basic visualizations.
+
+b.) How big is this dataset and does it seem of an appropriate size for this problem?
+	The dataset contains 398 instances, which isn’t a ton but seems appropriate for this problem because it is probably pretty comprehensive for a subject as narrow as “late-1970s and early 1980s automobiles”.
+
+c.) Explain what the prescribed normalization of the data does.
+	It uses the mean and standard deviation generated from the training dataset to normalize the data. Not normalizing the data would mean that the features would use different scales and ranges, make training more difficult, and the resulting model would be dependent on the choice of units used in the input.
+
+d.) Is this an example of a linear regression model?
+	Nope - it uses a non-linear activation function (relu).
+
+e.) In their conclusion, they claim that smaller datasets “prefer” smaller networks. Do you agree? Explain your answer.
+	It makes sense to use a smaller network for smaller datasets because it helps to avoid overfitting.
