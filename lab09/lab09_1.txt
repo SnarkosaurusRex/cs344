@@ -1,0 +1,18 @@
+--- LAB 9 ---
+
+Exercise 9.1:
+
+a.) How does the linear regression approach to the problem fare?
+	The final RMSE for the linear regressor model is 0.44, and it fluctuates only very slightly per period. For a value range of 0 to 1, that’s pretty lousy.
+
+b.) Task 1: Compare and contrast L2 Loss vs LogLoss.
+	L2 Loss doesn’t strongly differentiate between a negative example being classified as positive with a probability of 0.9 vs 0.9999, so it doesn’t do a great job at penalizing misclassifications when the output is interpreted as a probability. LogLoss, however, penalizes “confidence errors” much more heavily.
+
+c.) Task 2: Explain how the logistic regression fares compared to the linear regression.
+	The final LogLoss value for the logistic regression model is 0.53, which is actually worse than the linear regressor.
+
+d.) Task 3: Here, just report the best values you can achieve for AUC/accuracy and what hyperparameters you used to get them.
+	AUC on the validation set: 0.78, Accuracy on the validation set: 0.79 (corresponding final LogLoss (on training data): 0.50)
+	hyperparameters: learning_rate=0.00002, steps=1000, batch_size=50
+
+
