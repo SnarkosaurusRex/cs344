@@ -1,0 +1,15 @@
+--- LAB 9 ---
+
+Exercise 9.2:
+
+a.) Why are we regularizing with respect to sparsity?
+	Sparsity can help to avoid overfitting and the resulting model is also more efficient.
+
+b.) How does L1 regularization increase sparsity?
+	It encourages weights to be exactly zero, and in the case of linear models a zero weight is effectively the same as just not using the corresponding feature at all.
+
+c.) Task 1: Here, just report the best log loss value / model size you can get and what gamma value you used to get them.
+	LogLoss: 0.26
+	Model size: 577
+	regularization_strength: 0.8
+	(Note: I know that the solution says a regularization strength of 0.1 should be sufficient, but that produced a model size well over the stated limit of 600 when I tried it)
