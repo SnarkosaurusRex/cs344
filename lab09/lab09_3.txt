@@ -1,0 +1,31 @@
+--- LAB 9 ---
+
+Exercise 9.3:
+
+a.) Exercise 1:
+	i.) What’s the size of the cats/dogs datasets?
+		25,000 images (2,000 used in this exercise)
+
+	ii.) How does the first convnet compare with the one we did in class.
+		The CNN we did in class came up with an accuracy of 0.9916 (99%). This model ends up at an accuracy of only 0.7030, with quite a bit more loss as well.
+
+	iii.) Can you see any interesting patterns in the intermediate representations?
+		They look kind of like when you look at the negative of a photo/invert the colors, and/or like incompletely developed film. It’s also interesting how each row looks kind of like a repeat of the previous row, but smaller and repeated more times. I also find it interesting how some of them are very distinct, and others are very much not clear/identifiable.
+
+
+b.) Exercise 2:
+	i.) What is data augmentation?
+		The tutorial defines data augmentation as “artificially boosting the diversity and number of training examples by performing random transformations to existing images to create a set of new variants” and says that it is “especially useful when the original training data set is relatively small”. Basically, data augmentation is a way of beefing up a small set of training data by taking images from the set and applying transformations/distortions to them (e.g. stretching in various directions, mirrorring, etc) so it’s like having a bunch more images in your training set.
+
+	ii.) Report your best results and the hyperparameters you used to get them.
+			history = model.fit_generator(
+		      train_generator,
+		      steps_per_epoch=100,
+		      epochs=30,
+		      validation_data=validation_generator,
+		      validation_steps=50,
+		      verbose=2)
+
+			Accuracy: 0.7460
+			Loss: 0.5246
+
