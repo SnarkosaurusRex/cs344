@@ -1,0 +1,41 @@
+--- LAB 10 ---
+
+Exercise 10.2:
+
+a.) What does AdaGrad do to boost performance?
+		It modifies the learning rate adaptively for each coefficient in a model, monotonically lowering the effective learning rate.
+
+b.) Tasks 1–4: Report your best hyperparameter settings and their resulting performance.
+	Task 1:
+		learning_rate=0.004,
+		steps=5000,
+		batch_size=70,
+		hidden_units=[10, 10]
+	Final RMSE (on training data):   68.15
+	Final RMSE (on validation data): 69.84
+
+	Task 2:
+		Adagrad:
+			learning_rate=0.05,
+			steps=2000,
+			batch_size=50,
+			hidden_units=[10, 10]
+		Final RMSE (on training data):   69.47
+		Final RMSE (on validation data): 70.48
+
+		Adam:
+			learning_rate=0.05,
+			steps=2000,
+			batch_size=50,
+			hidden_units=[10, 10]
+		Final RMSE (on training data):   63.44
+		Final RMSE (on validation data): 64.41
+	
+	Task 3:
+		my_optimizer=tf.train.AdamOptimizer(learning_rate=0.05),
+		steps=2000,
+		batch_size=50,
+		hidden_units=[10, 10]
+	Final RMSE (on training data):   66.63
+	Final RMSE (on validation data): 67.16
+
