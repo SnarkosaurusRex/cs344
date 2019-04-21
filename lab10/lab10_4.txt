@@ -1,0 +1,46 @@
+--- LAB 10 ---
+
+Exercise 10.4:
+
+a.) Task 1: Is a linear model ever preferable to a deep NN model?
+		There are probably some contexts in which a linear model would be preferable to a deep NN model, even if only in the name of simplicity.
+
+b.) Task 2: Does the NN model do better than the linear model?
+		The NN model had slightly better accuracy on the training set (0.8 compared to 0.78652, but its accuracy on the test set was quite a bit worse (0.64 compared to 0.78444).
+
+c.) Task 3: Do embeddings do much good for sentiment analysis tasks?
+		At least in this case, it doesn’t seem to have made much difference - the performance metrics are fairly similar to those of the linear model.
+
+d.) Tasks 4–5: Name two words that have similar embeddings and explain why that makes sense.
+		“Fantastic” and “Excellent” are very close to each other, which makes sense because those two words are synonyms.
+
+e.) Task 6: Report your best hyper-parameters and their resulting performance.
+		AdamOptimizer, learning_rate=0.1, steps=1000
+		
+		Results:
+			Training set metrics:
+			loss 4.0380807
+			accuracy_baseline 0.5
+			global_step 1000
+			recall 0.95592
+			auc 0.98975056
+			prediction/mean 0.5159319
+			precision 0.95991325
+			label/mean 0.5
+			average_loss 0.16152324
+			auc_precision_recall 0.9898812
+			accuracy 0.958
+			---
+			Test set metrics:
+			loss 7.5233045
+			accuracy_baseline 0.5
+			global_step 1000
+			recall 0.86648
+			auc 0.9471644
+			prediction/mean 0.503329
+			precision 0.8882237
+			label/mean 0.5
+			average_loss 0.3009322
+			auc_precision_recall 0.9444688
+			accuracy 0.87872
+			---
