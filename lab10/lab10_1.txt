@@ -1,0 +1,21 @@
+--- LAB 10 ---
+
+Exercise 10.1:
+
+a.) Would you rather use TensorFlow or Keras to build your models?
+		I would probably rather use Keras since it’s more simple (because it’s a high level API).
+
+b.) Tasks 1 & 2: Report your best hyper-parameter settings and their resulting performance on the testing dataset.
+	Task 1:
+		learning_rate=0.18,
+		steps=500,
+		batch_size=10,
+		hidden_units=[10, 2]
+	Final RMSE (on training data):   116.26
+	Final RMSE (on validation data): 115.33
+
+	(Note: this was the best result I got after quite a lot of experimenting, so I finally just went with it even though it technically didn’t reach the goal of below 110)
+
+	Task 2:
+		Final RMSE (on test data): 108.74
+
