@@ -1,7 +1,7 @@
 % Exercise 12.1
 % Part a
 
-% i.1.) killer is a property of the name butch (zed)
+% i.1.) killer is a property of the name butch (fact)
 killer(butch).
 
 % i.2.) married is a property of mia and marsellus (fact)
