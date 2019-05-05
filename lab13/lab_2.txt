@@ -1,0 +1,13 @@
+--- LAB 13 ---
+Exercise 13.2
+
+
+isOn(a, b)
+isOn(b, c)
+supports(table, c)
+∀x,y supports(x,y) ⇒ isOn(y,x)
+∀x,y isOn(x,y) ⇒ isAbove(x,y)
+∀x,y,z isAbove(x,y) ∧ isAbove(y,z) ⇒ isAbove(x,z)
+
+
+*** Coming soon to a repo near you: proof by resolution/unification that A is above the table ***
